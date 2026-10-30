@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: estoque-vendas-api
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/estoque}
+    username: ${DB_USER:estoque}
+    password: ${DB_PASSWORD:estoque}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  web:
+    locale: pt_BR
+    locale-resolver: fixed
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+    include-message: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiracao-minutos: ${JWT_EXPIRACAO_MINUTOS:120}
+  cors:
+    origens: ${CORS_ORIGENS:http://localhost:5173}
+  admin:
+    email: ${ADMIN_EMAIL:admin@estoque.local}
+    senha: ${ADMIN_SENHA:}
+  dados-demo: ${APP_DADOS_DEMO:false}
+  fuso-horario: ${APP_FUSO_HORARIO:America/Sao_Paulo}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
